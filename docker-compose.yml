@@ -1,0 +1,17 @@
+services:
+  back-prueba-bloxtek:
+    build:
+      context: ./back-prueba-bloxtek
+      dockerfile: Dockerfile
+    ports:
+      - 8080:3000
+    environment:
+      - NODE_ENV=production
+  front-prueba-bloxtek:
+    build:
+      context: ./front-prueba-bloxtek
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=production
