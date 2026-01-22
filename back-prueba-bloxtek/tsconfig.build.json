@@ -2,14 +2,19 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "noEmit": false,
-    "outDir": "./dist",
-    "module": "commonjs",
+    "outDir": "dist",
+    "rootDir": ".",
+
     "target": "ES2020",
+    "module": "CommonJS",
     "moduleResolution": "node",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "allowImportingTsExtensions": false
+
+    "lib": ["ES2020"],
+    "types": ["node"],
+
+    "sourceMap": true,
+    "declaration": false
   },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
 }
