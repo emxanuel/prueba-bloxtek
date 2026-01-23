@@ -198,9 +198,6 @@ Para detener los servicios:
 ```bash
 # Detener y eliminar contenedores (mantiene los datos)
 docker compose down
-
-# Detener y eliminar contenedores junto con volúmenes
-docker compose down -v
 ```
 
 ### 5. Ver Logs
@@ -363,11 +360,3 @@ lsof -i :3000  # o :8080
 # Matar el proceso
 kill -9 <PID>
 ```
-
-## Licencia
-
-ISC
-
-## Contacto
-
-Para preguntas o soporte, contacta al equipo de desarrollo.
