@@ -16,8 +16,6 @@ FROM node:20-alpine AS runner
 
 WORKDIR /app
 
-ENV NODE_ENV=production
-
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
 COPY package.json ./

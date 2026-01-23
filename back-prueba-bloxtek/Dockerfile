@@ -12,11 +12,12 @@ COPY . .
 
 RUN pnpm run build
 
+RUN pnpm prisma generate
+
 FROM node:20-alpine AS runner
 
 WORKDIR /app
 
-ENV NODE_ENV=production
 
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
@@ -27,6 +28,8 @@ RUN pnpm install --prod
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
 
-EXPOSE 3000
+ENV PORT=8080
+
+EXPOSE 8080
 
 CMD ["node", "dist/index.js"]
