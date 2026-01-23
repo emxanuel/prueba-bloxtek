@@ -1,7 +1,9 @@
+import WelcomeUser from "@/features/dashboard/components/welcome-user";
+
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans">
-      Hola!
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-indigo-50">
+      <WelcomeUser />
     </div>
   );
 }
