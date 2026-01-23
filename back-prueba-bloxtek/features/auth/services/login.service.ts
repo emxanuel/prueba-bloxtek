@@ -4,9 +4,9 @@ import { config } from "@/core/config";
 import bcrypt from "bcrypt";
 import * as jose from "jose";
 import { sessionsRepository } from "../repositories/sessions.repository";
+import { LoginResponseDto } from "../dtos/login.dto";
 
-
-async function loginService(email: string, password: string) {
+async function loginService(email: string, password: string): Promise<LoginResponseDto> {
 
   const user = await userRepository.findUserByEmail(email);
 
@@ -23,7 +23,11 @@ async function loginService(email: string, password: string) {
   const session = await sessionsRepository.createSession(user.id);
 
   return {
-    user,
+    user: {
+      uuid: user.uuid,
+      name: user.name,
+      email: user.email,
+    },
     token: await new jose.SignJWT({ user: user.uuid, session: session.uuid })
       .setProtectedHeader({ alg: "HS256" })
       .setExpirationTime(config.jwtExpiration)

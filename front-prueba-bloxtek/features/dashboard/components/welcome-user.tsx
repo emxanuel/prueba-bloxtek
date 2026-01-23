@@ -48,7 +48,7 @@ export default function WelcomeUser() {
               </svg>
             </div>
             <h1 className="text-4xl font-bold text-gray-900 mb-3">
-              Welcome back, {user.name}! 👋
+              Welcome to the dashboard, {user.name}! 👋
             </h1>
             <p className="text-lg text-gray-600">
               You&apos;re successfully signed in to your account

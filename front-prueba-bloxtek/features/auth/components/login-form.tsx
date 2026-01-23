@@ -28,7 +28,7 @@ export default function LoginForm() {
     setError(null);
     setLoading(true);
     const response = await authService.login(data.email, data.password);
-    if (response.error) {
+    if ("error" in response) {
       setError(response.error);
       setLoading(false);
     } else {

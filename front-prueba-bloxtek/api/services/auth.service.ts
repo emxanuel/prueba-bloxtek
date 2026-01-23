@@ -1,10 +1,11 @@
 import { apiClient } from "../client";
 import { AxiosError } from "axios";
+import { AuthResponse, AuthErrorResponse, LogoutResponse } from "@/features/auth/types/auth.types";
 
 export const authService = {
-  login: async (email: string, password: string) => {
+  login: async (email: string, password: string): Promise<AuthResponse | AuthErrorResponse> => {
     try {
-      const response = await apiClient.post("/auth/login", {
+      const response = await apiClient.post<AuthResponse>("/auth/login", {
         email,
         password,
       });
@@ -18,9 +19,9 @@ export const authService = {
       throw error;
     }
   },
-  register: async (name: string, email: string, password: string) => {
+  register: async (name: string, email: string, password: string): Promise<AuthResponse | AuthErrorResponse> => {
     try {
-      const response = await apiClient.post("/auth/register", {
+      const response = await apiClient.post<AuthResponse>("/auth/register", {
       name,
       email,
       password,
@@ -35,9 +36,9 @@ export const authService = {
       throw error;
     }
   },
-  logout: async (token: string) => {
+  logout: async (token: string): Promise<LogoutResponse | AuthErrorResponse> => {
     try {
-      const response = await apiClient.post("/auth/logout", {}, {
+      const response = await apiClient.post<LogoutResponse>("/auth/logout", {}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

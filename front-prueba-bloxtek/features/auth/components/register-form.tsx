@@ -29,7 +29,7 @@ export default function RegisterForm() {
     setError(null);
     setLoading(true);
     const response = await authService.register(data.name, data.email, data.password);
-    if (response.error) {
+    if ("error" in response) {
       setError(response.error);
       setLoading(false);
     } else {

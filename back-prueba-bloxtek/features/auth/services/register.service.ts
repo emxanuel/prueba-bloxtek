@@ -4,8 +4,9 @@ import { BadRequestError } from "@/core/errors";
 import * as jose from "jose";
 import bcrypt from "bcrypt";
 import { sessionsRepository } from "../repositories/sessions.repository";
+import { RegisterResponseDto } from "../dtos/register.dto";
 
-async function registerService(name: string, email: string, password: string) {
+async function registerService(name: string, email: string, password: string): Promise<RegisterResponseDto> {
   const user = await userRepository.findUserByEmail(email);
 
   if (user) {
@@ -19,7 +20,11 @@ async function registerService(name: string, email: string, password: string) {
   const session = await sessionsRepository.createSession(newUser.id);
 
   return {
-    user: newUser,
+    user: {
+      uuid: newUser.uuid,
+      name: newUser.name,
+      email: newUser.email
+    },
     token: await new jose.SignJWT({ user: newUser.uuid, session: session.uuid })
       .setProtectedHeader({ alg: "HS256" })
       .setExpirationTime(config.jwtExpiration)
